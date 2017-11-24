@@ -13,10 +13,13 @@ description: "Embrace rapid evolution without breaking consumers."
 		{param content kind="html"}
 			{call .header data="all" /}
 			{call .why /}
+			{call .form /}
+			/*
 			{call .features /}
 			{call .how /}
 			{call .highlights /}
 			{call .footer /}
+			*/
 		{/param}
 	{/call}
 {/template}
@@ -30,11 +33,27 @@ description: "Embrace rapid evolution without breaking consumers."
 			<h1 class="header-title">{$site.title}</h1>
 			<h2 class="header-subtitle">{$site.index.description}</h2>
 			<div class="header-cta">
-				<a href="#" class="btn btn-accent">Main call to action</a>
-				<a href="#" class="btn btn-default">Secondary action</a>
+				<a href="#sign-up" class="btn btn-accent">Sign Up</a>
+				<!--<a href="#" class="btn btn-default">Secondary action</a> -->
 			</div>
 		</div>
 	</header>
+{/template}
+
+/**
+ *
+ */
+{template .form}
+	<article class="features">
+		<div class="container" id="sign-up">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-2">
+					<h3 class="header-subtitle">Let us know if you want to participate in the project</h3>
+					<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSej62cM1_Yx5fsSFoIKnUmXGXRNtZofcvjk-u5odbgkebnmyA/viewform?embedded=true" width="760" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+				</div>
+			</div>
+		</div>
+	</article>
 {/template}
 
 /**
@@ -45,8 +64,17 @@ description: "Embrace rapid evolution without breaking consumers."
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-md-offset-2">
-					<h3 class="about-title">Start with why</h3>
-					<p class="about-description">Through the WHY, a story will arise, which will create trust and make an idea, a service, or a project unique. As Simon Sinek has said, having loyal users is all about attracting the people who share your fundamental beliefs. Remember: People don't buy what you do. They buy why you do it. I'll say it again: People don't buy what you do. They buy why you do it.</p>
+					<h3 class="about-title">Why do we need Evolvable APIs?</h3>
+					<p class="about-description">
+						The Web is almost 30 years old. If something has been proven key, is the capability of the Web to evolve gracefully over the years.
+					</p>
+					<p class="about-description">
+					But what about APIs? Are they designed the same way? Are they prepared to evolve as seamlessly as the Web? 
+					Unfortunately not. It’s common in these days to be forced to update clients because a minor feature has been removed, changed or added in the server side. If APIs must growth as the web did, this is critical problem to solve.
+					</p>
+					<p class="about-description">
+						So, what is the key factor that made the Web so evolvable but not the APIs?  The answer is in two of the core technologies of the Web: HTTP and HTML. Both start with “Hypertext” and that’s not casual: it’s a core feature in the design of the Web, and a critical factor of its capability to evolve and its success. That’s why Hypermedia is the “H” currently missing in most of the APIs our there
+					</p>
 				</div>
 			</div>
 		</div>
