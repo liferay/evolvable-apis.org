@@ -16,7 +16,7 @@ node -v && npm -v
 [sudo] npm i -g electric-cli
 ```
 
-3. Install our local dependencies:
+3. Install our local dependencies (inside the project directory):
 
 ```sh
 npm i
