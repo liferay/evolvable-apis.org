@@ -10,7 +10,7 @@
     "electric-marble-components": "^4.0.4",
     "marble": "^3.3.0",
     "marble-topbar": "^1.0.0",
-    "moment": "^2.19.2"
+    "moment": "^2.21.0"
   },
   "dependencies": {
     "wedeploy": "^4.2.0"
