@@ -8,13 +8,11 @@ import WeDeploy from 'wedeploy';
 import templates from './Sign.soy.js';
 
 class Sign extends Component {
-	attached() {
+	onSubmit(e) {
 		if (isServerSide()) {
 			return;
 		}
-	}
 
-	onSubmit(e) {
 		e.preventDefault();
 
 		WeDeploy
