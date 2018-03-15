@@ -6,9 +6,10 @@ description: "Embrace rapid evolution without breaking consumers."
 {namespace pageIndex}
 
 /**
- * @param site
  */
 {template .render}
+	{@param site: ?}
+
 	{call main.render data="all"}
 		{param content kind="html"}
 			{call .header data="all" /}
@@ -18,30 +19,29 @@ description: "Embrace rapid evolution without breaking consumers."
 			{call .features /}
 			{call .how /}
 			{call .highlights /}
-			{call .footer /}
+			{call Footer.render data="all" /}
 			*/
 		{/param}
 	{/call}
 {/template}
 
 /**
- * @param site
  */
 {template .header}
+	{@param site: ?}
+
 	<header class="header">
 		<div class="container">
 			<h1 class="header-title">{$site.title}</h1>
 			<h2 class="header-subtitle">{$site.index.description}</h2>
 			<div class="header-cta">
 				<a href="#sign-up" class="btn btn-accent">Sign Up</a>
-				<!--<a href="#" class="btn btn-default">Secondary action</a> -->
 			</div>
 		</div>
 	</header>
 {/template}
 
 /**
- *
  */
 {template .form}
 	<article class="features">
@@ -57,7 +57,6 @@ description: "Embrace rapid evolution without breaking consumers."
 {/template}
 
 /**
- *
  */
 {template .why}
 	<article class="about">
@@ -69,7 +68,7 @@ description: "Embrace rapid evolution without breaking consumers."
 						The Web is almost 30 years old. If something has been proven key, is the capability of the Web to evolve gracefully over the years.
 					</p>
 					<p class="about-description">
-					But what about APIs? Are they designed the same way? Are they prepared to evolve as seamlessly as the Web? 
+					But what about APIs? Are they designed the same way? Are they prepared to evolve as seamlessly as the Web?
 					Unfortunately not. It’s common in these days to be forced to update clients because a minor feature has been removed, changed or added in the server side. If APIs must growth as the web did, this is critical problem to solve.
 					</p>
 					<p class="about-description">
@@ -82,7 +81,6 @@ description: "Embrace rapid evolution without breaking consumers."
 {/template}
 
 /**
- *
  */
 {template .features}
 	<div class="features">
@@ -115,7 +113,6 @@ description: "Embrace rapid evolution without breaking consumers."
 {/template}
 
 /**
- *
  */
 {template .how}
 	<article class="about">
@@ -131,7 +128,6 @@ description: "Embrace rapid evolution without breaking consumers."
 {/template}
 
 /**
- *
  */
 {template .highlights}
 	<div class="highlights">
@@ -165,22 +161,4 @@ description: "Embrace rapid evolution without breaking consumers."
 			</section>
 		</div>
 	</div>
-{/template}
-
-/**
- *
- */
-{template .footer}
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<p class="footer-description col-md-6 col-md-offset-2">
-					Copyright © 2017 <a href="https://liferay.com">Liferay, Inc</a>
-				</p>
-				<p class="footer-description col-md-6">
-					Powered by <a href="http://wedeploy.com">WeDeploy™</a>
-				</p>
-			</div>
-		</div>
-	</footer>
 {/template}

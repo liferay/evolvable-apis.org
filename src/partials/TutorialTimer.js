@@ -1,14 +1,19 @@
 'use strict';
 
+import {isServerSide} from 'metal';
 import Component from 'metal-component';
 import Soy from 'metal-soy';
 import moment from 'moment';
 import {addClasses, hasClass} from 'metal-dom';
 
-import templates from './TutorialTimer.soy';
+import templates from './TutorialTimer.soy.js';
 
 class TutorialTimer extends Component {
 	attached() {
+		if (isServerSide()) {
+			return;
+		}
+
 		this.time = this.calculateTimeRemaining();
 	}
 

@@ -4,9 +4,9 @@ import {isServerSide} from 'metal';
 import Component from 'metal-component';
 import Soy from 'metal-soy';
 
-import templates from './SocialButtons.soy.js';
+import templates from './Footer.soy.js';
 
-class SocialButtons extends Component {
+class Footer extends Component {
 	attached() {
 		if (isServerSide()) {
 			return;
@@ -14,10 +14,11 @@ class SocialButtons extends Component {
 	}
 
 	rendered() {
-		this.siteUrl = window.location.origin;
+		this.year = new Date().getFullYear();
 	}
+
 };
 
-Soy.register(SocialButtons, templates);
+Soy.register(Footer, templates);
 
-export default SocialButtons;
+export default Footer;
