@@ -13,8 +13,10 @@ description: "Embrace rapid evolution without breaking consumers."
 	{call main.render data="all"}
 		{param content kind="html"}
 			{call .header data="all" /}
-			{call .why /}
-			{call .form /}
+			{call .overview /}
+      {call .purpose /}
+      {call .concepts /}
+      {call .footer /}
 			/*
 			{call .features /}
 			{call .how /}
@@ -35,29 +37,75 @@ description: "Embrace rapid evolution without breaking consumers."
 			<h1 class="header-title">{$site.title}</h1>
 			<h2 class="header-subtitle">{$site.index.description}</h2>
 			<div class="header-cta">
-				<a href="#sign-up" class="btn btn-accent">Sign Up</a>
+				<a href="#sign-up" class="btn btn-accent">Guidelines</a>
 			</div>
 		</div>
 	</header>
 {/template}
 
 /**
- */
-{template .form}
-	<article class="features">
-		<div class="container" id="sign-up">
-			<div class="row">
-				<div class="col-md-12 col-md-offset-2">
-					<h3 class="header-subtitle">Let us know if you want to participate in the project</h3>
-					<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSej62cM1_Yx5fsSFoIKnUmXGXRNtZofcvjk-u5odbgkebnmyA/viewform?embedded=true" width="760" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+*/
+{template .overview}
+	<article class="highlights">
+		<div class="container">
+			<section class="row">
+				<div class="col-md-6 col-md-push-9">
+					<h4 class="highlight-title">Overview.</h4>
+					<p class="highlight-description">A way of designing APIs based on what made the web so succesful.</p>
+					<p class="highlight-description">A compromise to decouple API providers and consumers, allowgin them to evolve at different paces.</p>
 				</div>
-			</div>
-		</div>
-	</article>
+				<div class="col-md-5 col-md-o ffset-2 col-md-pull-6">
+					<img class="rename-to-highlight-image" src="/images/overview.png" alt="Overview">
+				</div>
+      </section>
+    </div>
+  </article>
 {/template}
 
 /**
- */
+*/
+{template .purpose}
+<article class="highlights">
+  <div class="container">
+    <section class="row hightlight">
+				<div class="col-md-6 col-md-offset-2">
+					<h4 class="highlight-title">Purpose.</h4>
+          <ul class="highlight-descripttion">
+            <li>APIs are increasing in digital importance and they can perform much better.</li>
+            <li>Designing APIs that are efficient, consistent, easy to consume, and future-proof seems to be very hard and it shoudn't be.</li>
+            <li>We know you are interested in building a great API and we want a common place to share info.</li>
+          </ul>
+				</div>
+				<div class="col-md-5 col-md-offset-1">
+					<img class="rename-to-highlight-image" src="images/purpose.png" alt="purpose">
+				</div>
+			</section>
+    </div>
+  </article>
+{/template}
+
+/**
+*/
+{template .concepts}
+	<article class="highlights">
+		<div class="container">
+			<section class="row">
+				<div class="col-md-6 col-md-push-9">
+					<h4 class="highlight-title">Concepts.</h4>
+					<p class="highlight-description"><strong>REST</strong>, as the foundation.</p>
+					<p class="highlight-description"><strong>Hypermedia</strong>, as a means to represent the state of application.</p>
+					<p class="highlight-description"><strong>Shared Vocabularies</strong>, to speak a common language and models for the representation.</p>
+          <a href="#exploreConcepts">Explore Concepts</a>
+				</div>
+				<div class="col-md-5 col-md-o ffset-2 col-md-pull-6">
+					<img class="rename-to-highlight-image" src="images/concepts.png" alt="Concepts">
+				</div>
+      </section>
+    </div>
+  </article>
+{/template}
+
+/**
 {template .why}
 	<article class="about">
 		<div class="container">
@@ -82,83 +130,17 @@ description: "Embrace rapid evolution without breaking consumers."
 
 /**
  */
-{template .features}
-	<div class="features">
+{template .footer}
+	<footer class="footer">
 		<div class="container">
 			<div class="row">
-				<section class="feature col-md-4 col-md-offset-2">
-					<div class="feature-graphic">
-						<span class="icon-16-bullhorn"></span>
-					</div>
-					<h3 class="feature-title">Heading</h3>
-					<p class="feature-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.</p>
-				</section>
-				<section class="feature col-md-4">
-					<div class="feature-graphic">
-						<span class="icon-16-lock"></span>
-					</div>
-					<h3 class="feature-title">Heading</h3>
-					<p class="feature-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.</p>
-				</section>
-				<section class="feature col-md-4">
-					<div class="feature-graphic">
-						<span class="icon-16-calendar"></span>
-					</div>
-					<h3 class="feature-title">Heading</h3>
-					<p class="feature-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo.</p>
-				</section>
+				<p class="footer-description col-md-6 col-md-offset-2">
+					2018 MIT License
+				</p>
+				<p class="footer-description col-md-6">
+					Powered by <a href="http://wedeploy.com">WeDeploy™</a>
+				</p>
 			</div>
 		</div>
-	</div>
-{/template}
-
-/**
- */
-{template .how}
-	<article class="about">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-md-offset-2">
-					<h3 class="about-title">It's easier than you think</h3>
-					<p class="about-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo ultricies vehicula ut.</p>
-				</div>
-			</div>
-		</div>
-	</article>
-{/template}
-
-/**
- */
-{template .highlights}
-	<div class="highlights">
-		<div class="container">
-			<section class="highlight row">
-				<div class="col-md-6 col-md-offset-2">
-					<h4 class="highlight-title">First highlight. It'll blow your mind.</h4>
-					<p class="highlight-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo ultricies vehicula ut.</p>
-				</div>
-				<div class="col-md-5 col-md-offset-1">
-					<img class="highlight-image" src="http://placehold.it/500x400/e7e8e8/64696d" alt="Placeholder">
-				</div>
-			</section>
-			<section class="highlight row">
-				<div class="col-md-6 col-md-push-9">
-					<h4 class="highlight-title">It's that good. See for yourself.</h4>
-					<p class="highlight-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo ultricies vehicula ut.</p>
-				</div>
-				<div class="col-md-5 col-md-offset-2 col-md-pull-6">
-					<img class="highlight-image" src="http://placehold.it/500x400/e7e8e8/64696d" alt="Placeholder">
-				</div>
-			</section>
-			<section class="highlight row">
-				<div class="col-md-6 col-md-offset-2">
-					<h4 class="highlight-title">And lastly, this one. Checkmate.</h4>
-					<p class="highlight-description">Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros praesent commodo ultricies vehicula ut.</p>
-				</div>
-				<div class="col-md-5 col-md-offset-1">
-					<img class="highlight-image" src="http://placehold.it/500x400/e7e8e8/64696d" alt="Placeholder">
-				</div>
-			</section>
-		</div>
-	</div>
+	</footer>
 {/template}
