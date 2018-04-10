@@ -1,10 +1,13 @@
 ---
-title: "Introduction"
+title: "Evolvable REST API Guidelines"
 description: "The Evolvable REST API Guidelines provide a well defined set of mandatory and recommended rules for REST APIs designed to achieve a high degree of decoupling of API providers and all of its consumers. This decoupling allows the API to evolve over time without breaking any of the consumers."
 layout: "guide"
-icon: "flash"
+icon: "code-file"
 weight: 1
 ---
+<article id="1">
+
+## Introduction
 
 ###### {$page.description}
 
@@ -15,7 +18,16 @@ These guidelines aim to achieve the following goals:
 - Define a standard that developers can use as the basis for creating server-side or consumer-side libraries that facilitate the creation of Evolvable REST APIs.
 
 These guidelines embrace the REST architectural style, with a special emphasis on using hypermedia as the engine of application state.
+</article>
 
-### Conventions used in this document
+<article id="2">
 
-This guide is a living document and additions to it will be made over time as new style and design patterns are adopted and approved. In that spirit, it is never going to be complete. The requirement level keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" used in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+## Conventions used in this document
+
+This guide is a living document and additions to it will be made over time as new style and design patterns are adopted and approved. In that spirit, it is never going to be complete. The requirement level keywords `MUST`, `MUST NOT`, `REQUIRED`, `SHALL`, `SHALL NOT`, `SHOULD`, `SHOULD NOT`, `RECOMMENDED`, `MAY`, and `OPTIONAL` used in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+
+
+{call DocsList.render}
+	{param section: $page /}
+{/call}
+</article>
