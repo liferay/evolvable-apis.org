@@ -1,10 +1,3 @@
-/**
- * Senna.js - A blazing-fast Single Page Application engine
- * @author Liferay, Inc.
- * @version v2.4.2
- * @link http://sennajs.com
- * @license BSD-3-Clause
- */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -2370,7 +2363,7 @@ var utils = function () {
 			try {
 				return new Uri(url);
 			} catch (err) {
-				void 0;
+				console.error(err.message + ' ' + url);
 				return false;
 			}
 		}
@@ -2403,6 +2396,23 @@ var utils = function () {
 				path = path.substr(0, length - 1);
 			}
 			return path;
+		}
+
+		/**
+   * Overrides document referrer
+   * @param {string} referrer
+   * @static
+   */
+
+	}, {
+		key: 'setReferrer',
+		value: function setReferrer(referrer) {
+			Object.defineProperty(globals.document, 'referrer', {
+				configurable: true,
+				get: function get$$1() {
+					return referrer;
+				}
+			});
 		}
 	}]);
 	return utils;
@@ -5950,7 +5960,21 @@ var Screen = function (_Cacheable) {
 	createClass(Screen, [{
 		key: 'activate',
 		value: function activate() {
-			void 0;
+			console.log('Screen [' + this + '] activate');
+		}
+
+		/**
+   * Gives the Screen a chance to cancel the navigation and stop itself from
+   * activating. Can be used, for example, to prevent navigation if a user
+   * is not authenticated. Lifecycle.
+   * @return {boolean=|?CancellablePromise=} If returns or resolves to true,
+   *     the current screen is locked and the next nagivation interrupted.
+   */
+
+	}, {
+		key: 'beforeActivate',
+		value: function beforeActivate() {
+			console.log('Screen [' + this + '] beforeActivate');
 		}
 
 		/**
@@ -5958,14 +5982,14 @@ var Screen = function (_Cacheable) {
    * being deactivated. Can be used, for example, if the screen has unsaved
    * state. Lifecycle. Clean-up should not be preformed here, since the
    * navigation may still be cancelled. Do clean-up in deactivate.
-   * @return {boolean=} If returns true, the current screen is locked and the
-   *     next nagivation interrupted.
+   * @return {boolean=|?CancellablePromise=} If returns or resolves to true,
+   *     the current screen is locked and the next nagivation interrupted.
    */
 
 	}, {
 		key: 'beforeDeactivate',
 		value: function beforeDeactivate() {
-			void 0;
+			console.log('Screen [' + this + '] beforeDeactivate');
 		}
 
 		/**
@@ -6001,7 +6025,7 @@ var Screen = function (_Cacheable) {
 	}, {
 		key: 'deactivate',
 		value: function deactivate() {
-			void 0;
+			console.log('Screen [' + this + '] deactivate');
 		}
 
 		/**
@@ -6014,7 +6038,7 @@ var Screen = function (_Cacheable) {
 		key: 'disposeInternal',
 		value: function disposeInternal() {
 			get(Screen.prototype.__proto__ || Object.getPrototypeOf(Screen.prototype), 'disposeInternal', this).call(this);
-			void 0;
+			console.log('Screen [' + this + '] dispose');
 		}
 
 		/**
@@ -6063,7 +6087,7 @@ var Screen = function (_Cacheable) {
 		value: function flip(surfaces) {
 			var _this2 = this;
 
-			void 0;
+			console.log('Screen [' + this + '] flip');
 
 			var transitions = [];
 
@@ -6101,7 +6125,7 @@ var Screen = function (_Cacheable) {
 	}, {
 		key: 'getSurfaceContent',
 		value: function getSurfaceContent() {
-			void 0;
+			console.log('Screen [' + this + '] getSurfaceContent');
 		}
 
 		/**
@@ -6128,7 +6152,7 @@ var Screen = function (_Cacheable) {
 	}, {
 		key: 'load',
 		value: function load() {
-			void 0;
+			console.log('Screen [' + this + '] load');
 			return CancellablePromise.resolve();
 		}
 
@@ -6835,12 +6859,12 @@ var App$1 = function (_EventEmitter) {
 
 			var path = utils.getUrlPath(url);
 
-			if (!this.isLinkSameOrigin_(uri.getHostname())) {
-				void 0;
+			if (!this.isLinkSameOrigin_(uri.getHost())) {
+				console.log('Offsite link clicked');
 				return false;
 			}
 			if (!this.isSameBasePath_(path)) {
-				void 0;
+				console.log('Link clicked outside app\'s base path');
 				return false;
 			}
 			// Prevents navigation if it's a hash change on the same url.
@@ -6848,7 +6872,7 @@ var App$1 = function (_EventEmitter) {
 				return false;
 			}
 			if (!this.findRoute(path)) {
-				void 0;
+				console.log('No route for ' + path);
 				return false;
 			}
 
@@ -6884,7 +6908,7 @@ var App$1 = function (_EventEmitter) {
 		key: 'createScreenInstance',
 		value: function createScreenInstance(path, route) {
 			if (!this.pendingNavigate && path === this.activePath) {
-				void 0;
+				console.log('Already at destination, refresh navigation');
 				return this.activeScreen;
 			}
 			/* jshint newcap: false */
@@ -6896,7 +6920,7 @@ var App$1 = function (_EventEmitter) {
 				} else {
 					screen = handler(route) || new Screen();
 				}
-				void 0;
+				console.log('Create screen for [' + path + '] [' + screen + ']');
 			}
 			return screen;
 		}
@@ -6942,25 +6966,24 @@ var App$1 = function (_EventEmitter) {
 		value: function doNavigate_(path, opt_replaceHistory) {
 			var _this5 = this;
 
-			if (this.activeScreen && this.activeScreen.beforeDeactivate()) {
-				this.pendingNavigate = CancellablePromise.reject(new CancellablePromise.CancellationError('Cancelled by active screen'));
-				return this.pendingNavigate;
-			}
-
 			var route = this.findRoute(path);
 			if (!route) {
 				this.pendingNavigate = CancellablePromise.reject(new CancellablePromise.CancellationError('No route for ' + path));
 				return this.pendingNavigate;
 			}
 
-			void 0;
+			console.log('Navigate to [' + path + ']');
 
 			this.stopPendingNavigate_();
 			this.isNavigationPending = true;
 
 			var nextScreen = this.createScreenInstance(path, route);
 
-			return nextScreen.load(path).then(function () {
+			return this.maybePreventDeactivate_().then(function () {
+				return _this5.maybePreventActivate_(nextScreen);
+			}).then(function () {
+				return nextScreen.load(path);
+			}).then(function () {
 				if (_this5.activeScreen) {
 					_this5.activeScreen.deactivate();
 				}
@@ -7026,7 +7049,7 @@ var App$1 = function (_EventEmitter) {
 			this.pendingNavigate = null;
 			globals.capturedFormElement = null;
 			globals.capturedFormButtonElement = null;
-			void 0;
+			console.log('Navigation done');
 		}
 
 		/**
@@ -7172,7 +7195,7 @@ var App$1 = function (_EventEmitter) {
 		value: function handleNavigateError_(path, nextScreen, error) {
 			var _this6 = this;
 
-			void 0;
+			console.log('Navigation error for [' + nextScreen + '] (' + error + ')');
 			this.emit('navigationError', {
 				error: error,
 				nextScreen: nextScreen,
@@ -7201,17 +7224,17 @@ var App$1 = function (_EventEmitter) {
 		}
 
 		/**
-   * Tests if hostname is an offsite link.
-   * @param {!string} hostname Link hostname to compare with
-   *     <code>globals.window.location.hostname</code>.
+   * Tests if host is an offsite link.
+   * @param {!string} host Link host to compare with
+   *     <code>globals.window.location.host</code>.
    * @return {boolean}
    * @protected
    */
 
 	}, {
 		key: 'isLinkSameOrigin_',
-		value: function isLinkSameOrigin_(hostname) {
-			return hostname === globals.window.location.hostname;
+		value: function isLinkSameOrigin_(host) {
+			return host === globals.window.location.host;
 		}
 
 		/**
@@ -7309,8 +7332,8 @@ var App$1 = function (_EventEmitter) {
    * by client code. If so, it replaces with a function that halts the normal
    * event flow in relation with the client onbeforeunload function.
    * This can be in most part used to prematurely terminate navigation to other pages
-   * according to the given constrait(s). 
-   * @protected 
+   * according to the given constrait(s).
+   * @protected
    */
 
 	}, {
@@ -7328,9 +7351,54 @@ var App$1 = function (_EventEmitter) {
 					}
 				};
 
-				// mark the updated handler due unwanted recursion 
+				// mark the updated handler due unwanted recursion
 				window.onbeforeunload._overloaded = true;
 			}
+		}
+
+		/**
+   * Cancels navigation if nextScreen's beforeActivate lifecycle method
+   * resolves to true.
+   * @param {!Screen} nextScreen
+   * @return {!CancellablePromise}
+   */
+
+	}, {
+		key: 'maybePreventActivate_',
+		value: function maybePreventActivate_(nextScreen) {
+			var _this8 = this;
+
+			return CancellablePromise.resolve().then(function () {
+				return nextScreen.beforeActivate();
+			}).then(function (prevent) {
+				if (prevent) {
+					_this8.pendingNavigate = CancellablePromise.reject(new CancellablePromise.CancellationError('Cancelled by next screen'));
+					return _this8.pendingNavigate;
+				}
+			});
+		}
+
+		/**
+   * Cancels navigation if activeScreen's beforeDeactivate lifecycle
+   * method resolves to true.
+   * @return {!CancellablePromise}
+   */
+
+	}, {
+		key: 'maybePreventDeactivate_',
+		value: function maybePreventDeactivate_() {
+			var _this9 = this;
+
+			return CancellablePromise.resolve().then(function () {
+				if (_this9.activeScreen) {
+					return _this9.activeScreen.beforeDeactivate();
+				}
+			}).then(function (prevent) {
+				if (prevent) {
+					_this9.pendingNavigate = CancellablePromise.reject(new CancellablePromise.CancellationError('Cancelled by active screen'));
+					return _this9.pendingNavigate;
+				}
+			});
 		}
 
 		/**
@@ -7460,7 +7528,7 @@ var App$1 = function (_EventEmitter) {
 		value: function onBeforeNavigateDefault_(event) {
 			if (this.pendingNavigate) {
 				if (this.pendingNavigate.path === event.path) {
-					void 0;
+					console.log('Waiting...');
 					return;
 				}
 			}
@@ -7501,7 +7569,7 @@ var App$1 = function (_EventEmitter) {
 		key: 'onDocClickDelegate_',
 		value: function onDocClickDelegate_(event) {
 			if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || event.button) {
-				void 0;
+				console.log('Navigate aborted, invalid mouse button or modifier key pressed.');
 				return;
 			}
 			this.maybeNavigate_(event.delegateTarget.href, event);
@@ -7519,7 +7587,7 @@ var App$1 = function (_EventEmitter) {
 		value: function onDocSubmitDelegate_(event) {
 			var form = event.delegateTarget;
 			if (form.method === 'get') {
-				void 0;
+				console.log('GET method not supported');
 				return;
 			}
 			event.capturedFormElement = form;
@@ -7542,13 +7610,13 @@ var App$1 = function (_EventEmitter) {
 	}, {
 		key: 'onLoad_',
 		value: function onLoad_() {
-			var _this8 = this;
+			var _this10 = this;
 
 			this.skipLoadPopstate = true;
 			setTimeout(function () {
 				// The timeout ensures that popstate events will be unblocked right
 				// after the load event occured, but not in the same event-loop cycle.
-				_this8.skipLoadPopstate = false;
+				_this10.skipLoadPopstate = false;
 			}, 0);
 			// Try to reposition scroll to the hashed anchor when page loads.
 			this.maybeRepositionScrollToHashedAnchor();
@@ -7598,12 +7666,17 @@ var App$1 = function (_EventEmitter) {
 			}
 
 			if (state.senna) {
-				void 0;
+				console.log('History navigation to [' + state.path + ']');
 				this.popstateScrollTop = state.scrollTop;
 				this.popstateScrollLeft = state.scrollLeft;
 				if (!this.nativeScrollRestorationSupported) {
 					this.lockHistoryScrollPosition_();
 				}
+				this.once('endNavigate', function () {
+					if (state.referrer) {
+						utils.setReferrer(state.referrer);
+					}
+				});
 				this.navigate(state.path, true);
 			}
 		}
@@ -7632,7 +7705,7 @@ var App$1 = function (_EventEmitter) {
 	}, {
 		key: 'onStartNavigate_',
 		value: function onStartNavigate_(event) {
-			var _this9 = this;
+			var _this11 = this;
 
 			this.maybeDisableNativeScrollRestoration();
 			this.captureScrollPositionFromScrollEvent = false;
@@ -7647,12 +7720,12 @@ var App$1 = function (_EventEmitter) {
 				endNavigatePayload.error = reason;
 				throw reason;
 			}).thenAlways(function () {
-				if (!_this9.pendingNavigate) {
-					removeClasses(globals.document.documentElement, _this9.loadingCssClass);
-					_this9.maybeRestoreNativeScrollRestoration();
-					_this9.captureScrollPositionFromScrollEvent = true;
+				if (!_this11.pendingNavigate) {
+					removeClasses(globals.document.documentElement, _this11.loadingCssClass);
+					_this11.maybeRestoreNativeScrollRestoration();
+					_this11.captureScrollPositionFromScrollEvent = true;
 				}
-				_this9.emit('endNavigate', endNavigatePayload);
+				_this11.emit('endNavigate', endNavigatePayload);
 			});
 
 			this.pendingNavigate.path = event.path;
@@ -7667,21 +7740,21 @@ var App$1 = function (_EventEmitter) {
 	}, {
 		key: 'prefetch',
 		value: function prefetch(path) {
-			var _this10 = this;
+			var _this12 = this;
 
 			var route = this.findRoute(path);
 			if (!route) {
 				return CancellablePromise.reject(new CancellablePromise.CancellationError('No route for ' + path));
 			}
 
-			void 0;
+			console.log('Prefetching [' + path + ']');
 
 			var nextScreen = this.createScreenInstance(path, route);
 
 			return nextScreen.load(path).then(function () {
-				return _this10.screens[path] = nextScreen;
+				return _this12.screens[path] = nextScreen;
 			}).catch(function (reason) {
-				_this10.handleNavigateError_(path, nextScreen, reason);
+				_this12.handleNavigateError_(path, nextScreen, reason);
 				throw reason;
 			});
 		}
@@ -7732,7 +7805,7 @@ var App$1 = function (_EventEmitter) {
 			Object.keys(surfaces).forEach(function (id) {
 				var surfaceContent = nextScreen.getSurfaceContent(id, params);
 				surfaces[id].addContent(nextScreen.getId(), surfaceContent);
-				void 0;
+				console.log('Screen [' + nextScreen.getId() + '] add content to surface ' + '[' + surfaces[id] + '] [' + (isDefAndNotNull(surfaceContent) ? '...' : 'empty') + ']');
 			});
 		}
 
@@ -7766,12 +7839,12 @@ var App$1 = function (_EventEmitter) {
 	}, {
 		key: 'removeScreen',
 		value: function removeScreen(path) {
-			var _this11 = this;
+			var _this13 = this;
 
 			var screen = this.screens[path];
 			if (screen) {
 				Object.keys(this.surfaces).forEach(function (surfaceId) {
-					return _this11.surfaces[surfaceId].remove(screen.getId());
+					return _this13.surfaces[surfaceId].remove(screen.getId());
 				});
 				screen.dispose();
 				delete this.screens[path];
@@ -7918,7 +7991,7 @@ var App$1 = function (_EventEmitter) {
 	}, {
 		key: 'syncScrollPositionSyncThenAsync_',
 		value: function syncScrollPositionSyncThenAsync_() {
-			var _this12 = this;
+			var _this14 = this;
 
 			var state = globals.window.history.state;
 			if (!state) {
@@ -7929,7 +8002,7 @@ var App$1 = function (_EventEmitter) {
 			var scrollLeft = state.scrollLeft;
 
 			var sync = function sync() {
-				if (_this12.updateScrollPosition) {
+				if (_this14.updateScrollPosition) {
 					globals.window.scrollTo(scrollLeft, scrollTop);
 				}
 			};
@@ -7953,11 +8026,19 @@ var App$1 = function (_EventEmitter) {
 	}, {
 		key: 'updateHistory_',
 		value: function updateHistory_(title, path, state, opt_replaceHistory) {
+			var referrer = globals.window.location.href;
+
+			if (state) {
+				state.referrer = referrer;
+			}
+
 			if (opt_replaceHistory) {
 				globals.window.history.replaceState(state, title, path);
 			} else {
 				globals.window.history.pushState(state, title, path);
 			}
+
+			utils.setReferrer(referrer);
 
 			var titleNode = globals.document.querySelector('title');
 			if (titleNode) {
@@ -9169,7 +9250,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			}
 
 			if (!this.baseElement.hasAttribute(dataAttributes.senna)) {
-				void 0;
+				console.log('Senna was not initialized from data attributes. ' + 'In order to enable its usage from data attributes try setting ' + 'in the base element, e.g. `<body data-senna>`.');
 				return;
 			}
 
@@ -9177,7 +9258,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 				throw new Error('Senna app was already initialized.');
 			}
 
-			void 0;
+			console.log('Senna initialized from data attribute.');
 
 			this.app = new App$1();
 			this.maybeAddRoutes_();
@@ -9239,7 +9320,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			});
 			if (!this.app.hasRoutes()) {
 				this.app.addRoutes(new Route(/.*/, HtmlScreen));
-				void 0;
+				console.log('Senna can\'t find route elements, adding default.');
 			}
 		}
 
@@ -9282,7 +9363,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 		value: function maybeParseLinkRoute_(link) {
 			var route = new Route(this.maybeParseLinkRoutePath_(link), this.maybeParseLinkRouteHandler_(link));
 			this.app.addRoutes(route);
-			void 0;
+			console.log('Senna scanned route ' + route.getPath());
 		}
 
 		/**
@@ -9329,7 +9410,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			var basePath = this.baseElement.getAttribute(dataAttributes.basePath);
 			if (isDefAndNotNull(basePath)) {
 				this.app.setBasePath(basePath);
-				void 0;
+				console.log('Senna scanned base path ' + basePath);
 			}
 		}
 
@@ -9344,7 +9425,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			var linkSelector = this.baseElement.getAttribute(dataAttributes.linkSelector);
 			if (isDefAndNotNull(linkSelector)) {
 				this.app.setLinkSelector(linkSelector);
-				void 0;
+				console.log('Senna scanned link selector ' + linkSelector);
 			}
 		}
 
@@ -9359,7 +9440,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 			var loadingCssClass = this.baseElement.getAttribute(dataAttributes.loadingCssClass);
 			if (isDefAndNotNull(loadingCssClass)) {
 				this.app.setLoadingCssClass(loadingCssClass);
-				void 0;
+				console.log('Senna scanned loading css class ' + loadingCssClass);
 			}
 		}
 
@@ -9378,7 +9459,7 @@ var AppDataAttributeHandler = function (_Disposable) {
 				} else {
 					this.app.setUpdateScrollPosition(true);
 				}
-				void 0;
+				console.log('Senna scanned update scroll position ' + updateScrollPosition);
 			}
 		}
 
@@ -9434,6 +9515,11 @@ globals.document.addEventListener('DOMContentLoaded', function () {
   dataAttributeHandler.handle();
 });
 
+/**
+ * @returns String current senna version
+ */
+var version = '<%= version %>';
+
 exports['default'] = App$1;
 exports.dataAttributeHandler = dataAttributeHandler;
 exports.utils = utils;
@@ -9442,6 +9528,7 @@ exports.HtmlScreen = HtmlScreen;
 exports.Route = Route;
 exports.RequestScreen = RequestScreen;
 exports.Screen = Screen;
+exports.version = version;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
