@@ -26,14 +26,17 @@ The following table provides a summary of the key characteristics of the most fr
 |OPTIONS|X|X| |Get the methods supported by a resource, through the “Allow” HTTP Header in the response, and optionally more detailed information in the body.|
 |HEAD|X|X| |Obtain the same behavior as GET but the without the response body. Often used to save bandwidth when the consumer is unsure whether the body will be needed.|
 
-###Leverage Idempotency
+
+### Leverage Idempotency
 
 GET, PUT, HEAD, OPTIONS MUST be treated as idempotent actions.
 
 API consumers SHOULD leverage idempotency, retrying failed requests using these methods, instead of directly escalating an error.
+
 </article>
 
 <article id="2">
+
 ## Resource Design
 
 ### Use URIs a resource identifiers
@@ -91,6 +94,7 @@ One specific case of Operation Resources are those operations that are run in an
 - `202 Accepted` if the operation could be enqueued successfully. The operation identifier URL will be included in the payload
 - `302 See other` if the operation is already enqueued. The operation identifier URL will be included in the Location header.
 - `409 Conflict` if the operation couldn’t be enqueued. The payload will include error details in a standard format (such as problem+json)
+
 </article>
 
 <article id="3">
@@ -128,9 +132,11 @@ Evolvable REST API implementations can specify the implementation version as an 
 Evolvable REST APIs MUST NOT include version information in the URIs. Doing so would go against using URIs as resource identifiers.
 
 Evolvable REST APIs MAY provide version information in some other ways, such as HTTP Headers or in the body of the responses for informative or debugging purposes. Evolvable REST API Consumers SHOULD NOT use version information automatically to change its behavior.
+
 </article>
 
 <article id="5">
+
 ## API Profile
 
 Evolvable REST APIs MUST provide an API profile that describes the following elements of the API:
