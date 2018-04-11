@@ -10,6 +10,10 @@ $accent: #84c202;
     background: #f0f4f8;
 }
 
+.ribbon-container {
+  z-index:1002;
+}
+
 // Landing
 @import "templates/landing";
 
