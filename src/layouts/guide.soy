@@ -8,9 +8,6 @@
 
 	<div class="main">
 		<main class="guide">
-      <div class="ribbon-container">
-        <div class="ribbon ribbon-accent">Beta</div>
-      </div>
 			<div class="docs">
 				{call Topbar.render}
 					{param items: $site.topbar /}
@@ -20,6 +17,9 @@
 						'icon': 'icon-16-hammer'
 					] /}
 				{/call}
+        <div class="ribbon-container">
+          <div class="ribbon ribbon-accent">Beta</div>
+        </div>
 				{call Sidebar.render}
 					{param section: $site.index.children['docs'] /}
 					{param site: $site /}
