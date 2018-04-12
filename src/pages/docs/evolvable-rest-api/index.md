@@ -2,7 +2,7 @@
 title: "Evolvable REST API Guidelines"
 description: "The Evolvable REST API Guidelines provide a well defined set of mandatory and recommended rules for REST APIs designed to achieve a high degree of decoupling of API providers and all of its consumers. This decoupling allows the API to evolve over time without breaking any of the consumers."
 layout: "guide"
-icon: "code-file"
+icon: "streams"
 weight: 1
 ---
 <article id="1">
