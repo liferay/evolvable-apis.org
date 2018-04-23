@@ -8,7 +8,15 @@ weight: 3
 
 <article id="1">
 
+## Context
+
 Sometimes our API returns a representation for a resource which includes a lot of information that the API provider keeps on the information, but if you think on the different kind of consumers that you will serve and, more specifically, the possible constraints that they have, maybe it’s useful if your API allows them to specify a shorter list of attributes that they want to retrieve (instead of the whole representation of the resource).
+
+</article>
+
+<article id="2">
+
+## Need
 
 For example, think on an IoT device, which is interested in using just a single property (or a few information) of the resource for which is requesting a representation. If you also take into account that maybe the device is sending the request (and retrieving the response) using a connection that does not has very good bandwidth, it makes more sense to allow to send back just 1Kb of data, that corresponds to the information that the consumer really is interested in, instead of -let’s say- the 14kb of data used for the represent the resource in its full extend.
 
@@ -23,27 +31,33 @@ GET /api/member/15
 ```
 And the server’s response includes the following representation of the requested person:
 
-```
+```javascript
 {
-  **"gender"**: "female",
-  **"alias"**: "Sophie",
-  **"name"**: "Sophia Hart",
-  **"jobTitle"** : "Senior Executive",
-  **"birthDate"**: "1975-04-12T00:00Z",
-  **"birthPlace"** : {
-    **"@type"**: "Place",
-    **"address"**: {
-      **"@type"**: "PostalAddress",
-      **"addressLocality"**: "Philadelphia",
-      **"addressRegion"**: "PA"
+  "gender": "female",
+  "alias": "Sophie",
+  "name": "Sophia Hart",
+  "jobTitle" : "Senior Executive",
+  "birthDate": "1975-04-12T00:00Z",
+  "birthPlace" : {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Philadelphia",
+      "addressRegion": "PA"
     }
   },
-  **"email"**: "sophia.hart@example.com",
-  **"telephone"**: "555-984-394"
+  "email": "sophia.hart@example.com",
+  "telephone": "555-984-394"
 }
 ```
 
 Let’s say that the customer is just going to show the contact data for the user: the name, the job title and email and phone if they are present.
+
+</article>
+
+<article id="3">
+
+## Solution
 
 We can prepare the API so that the list of requested fields can be specified in the URL of the request, using the fields param with a comma separated list of the attributes.
 
@@ -53,12 +67,12 @@ GET /api/member/15?fields=name,jobTitle,email,telephone
 
 And the API provider will reply with a partial response like the following one:
 
-```
+```javascript
 {
-  **"name"**: "Sophia Hart",
-  **"jobTitle"** : "Senior Executive",
-  **"email"**: "sophia.hart@example.com",
-  **"telephone"**: "555-984-394"
+  "name": "Sophia Hart",
+  "jobTitle" : "Senior Executive",
+  "email": "sophia.hart@example.com",
+  "telephone": "555-984-394"
 }
 ```
 
@@ -72,42 +86,42 @@ GET api/members
 
 And the subsequent response with all the information:
 
-```
+```javascript
 {
-   **"members"** : [
+   "members" : [
       {
-        **"gender"**: "female",
-        **"alias"**: "Sophie",
-        **"name"**: "Sophia Hart",
-        **"jobTitle"** : "Senior Executive",
-        **"birthDate"**: "1975-04-12T00:00Z",
-        **"birthPlace"** : {
-          **"@type"**: "Place",
-          **"address"**: {
-            **"@type"**: "PostalAddress",
-            **"addressLocality"**: "Philadelphia",
-            **"addressRegion"**: "PA"
+        "gender": "female",
+        "alias": "Sophie",
+        "name": "Sophia Hart",
+        "jobTitle" : "Senior Executive",
+        "birthDate": "1975-04-12T00:00Z",
+        "birthPlace" : {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Philadelphia",
+            "addressRegion": "PA"
           }
         },
-        **"email"**: "sophia.hart@example.com",
-        **"telephone"**: "555-984-394"
+        "email": "sophia.hart@example.com",
+        "telephone": "555-984-394"
       },
       {
-        **"gender"**: "male",
-        **"alias"**: "jdoe",
-        **"name"**: "John Doe",
-        **"jobTitle"**: "Sales Manager",
-        **"birthDate"**: "1977-03-15T00:00Z",
-        **"birthPlace"** : {
-          **"@type"**: "Place",
-          **"address"**: {
-            **"@type"**: "PostalAddress",
-            **"addressLocality"**: "Los Angeles",
-            **"addressRegion"**: "LA"
+        "gender": "male",
+        "alias": "jdoe",
+        "name": "John Doe",
+        "jobTitle": "Sales Manager",
+        "birthDate": "1977-03-15T00:00Z",
+        "birthPlace" : {
+          "@type": "Place",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Los Angeles",
+            "addressRegion": "LA"
           }
         },
-        **"email"**: "john.doe@email.com",
-        **"telephone"**: "555-984-394"
+        "email": "john.doe@email.com",
+        "telephone": "555-984-394"
       }     
    ]
 }
@@ -119,16 +133,16 @@ With a request in which your customer is asking just for the specific informatio
 GET api/members?fields=name,jobTitle
 ```
 
-```
+```javascript
 {
-   **"members"** : [
+   "members" : [
       {
-        **"name"**: "Sophia Hart",
-        **"jobTitle"** : "Senior Executive"
+        "name": "Sophia Hart",
+        "jobTitle" : "Senior Executive"
       },
       {
-        **"name"**: "John Doe",
-        **"jobTitle"**: "Sales Manager"
+        "name": "John Doe",
+        "jobTitle": "Sales Manager"
       }     
    ]
 }

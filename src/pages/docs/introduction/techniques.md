@@ -31,9 +31,9 @@ That way, Hypermedia, can be seen as the mechanism that enables the autodiscover
 
 ## Shared Vocabularies
 
-Use the language that everyone understands.
+Use carefully crafted message types that are focused on the needs of the consumers, instead of hoy the API is implemented *today*.
 
-It’s useful to speak a language that will result familiar to the developers of clients for your APIs. Using the same language means less misunderstandings, and it eases other participants to start talking to your APIhelps new participants to join the conversation with you. Using your own slang or assigning specific meanings you only know, will make more difficult to others to understand what you are saying.
+It’s useful to speak a language that will result familiar to the developers of clients for your APIs. Using the same language means less misunderstandings, and it eases other participants to start talking to your API. Using your own slang or assigning specific meanings you only know, will make more difficult to others to understand what you are saying.
 
 Any organization, group or individual has a different way to communicate depending on the context in which they are. For example: you can refer to things with an informal name when you are talking to your kids, or you can use slang when talking with your friends, or you can have specific aliases or specific names for certain concepts inside your company, even specific properties….
 
@@ -72,20 +72,6 @@ For your API, you will find useful to use Standards whenever they are available 
 </article>
 
 <article id="4">
-
-## Representor Pattern
-
-The representor pattern is a technique that allows you to decouple the internal model from the shared vocabulary you will expose in your contract
-
-The representor pattern means that will will add a component that will handle the resource that you want to serve as part of your API and will build a Representation of that resource adapted to what the customer needs or is allowed to receive.
-
-That means that you will convert your model to the shared vocabulary, but, also this is the component in which you could filter out specific information that one client should not see based on any security constraint or linked to an authorization process in your API.
-
-[The Representor pattern can be used both in API producers and consumers.](https://github.com/the-hypermedia-project/charter#representor-pattern)
-
-</article>
-
-<article id="5">
 
 ## Versioning your API Contract
 

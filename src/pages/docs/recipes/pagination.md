@@ -8,6 +8,8 @@ weight: 2
 
 <article id="1">
 
+## Context
+
 Let’s say that you have created a service that returns the list of members (persons) of your site. Initially, you modeled the list to contain the basic information for each of those persons:
 
 ```
@@ -39,7 +41,19 @@ And it seems right at first, it serves it purpose. But soon new members start to
 
 That’s a big amount of information to retrieve at once, and, on top of that, probably your API consumer is not going to show to its user all that information at once (the user probably won’t go through a 1.000 items list in any case).
 
+</article>
+
+<article id="2">
+
+## Need
+
 At that point you decide that you need to add some pagination mechanism (you will also add want to add filtering mechanisms to your API, but you still will benefit from pagination in the case the request does not include any filtering criteria).
+
+</article>
+
+<article id="3">
+
+## Solution
 
 So, let’s start with an outline of which information is important to handle the pagination:
 
