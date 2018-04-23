@@ -14,11 +14,15 @@ weight: 1
 
 The following subsections, will address specifics advices on how to design for each of the several useful features that will help your API to be more Evolvable. Or, maybe you do not need to make your API evolvable but you find that you can get the benefit of some of them.
 
+This is a section which work is in progress, so new content will be added continuosly.
+
 Read through the set of recipes and take their advice in them, here you have the menu:
 
 * [Pagination](pagination.html)
 
 * [Sparse fieldsets](sparse-fieldsets.html)
+
+and more to come...
 
 {call DocsList.render}
 	{param section: $page /}
