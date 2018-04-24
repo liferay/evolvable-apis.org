@@ -12,11 +12,10 @@ weight: 1
 
 ###### {$page.description}
 
-The following subsections, will address specifics advices on how to design for each of the several useful features that will help your API to be more Evolvable. Or, maybe you do not need to make your API evolvable but you find that you can get the benefit of some of them.
-
-This is a section which work is in progress, so new content will be added continuosly.
+The following articles, will address specific needs and challenges that might appear while designing an API and suggests evolvable solutions. Or, maybe you do not need to make your API evolvable but you find that you can get the benefit of some of them.
 
 Read through the set of recipes and take their advice in them, here you have the menu:
+
 
 * [Pagination](pagination.html)
 
