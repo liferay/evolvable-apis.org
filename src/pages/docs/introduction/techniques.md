@@ -1,5 +1,5 @@
 ---
-title: "Useful techniques to make your APIs evolvable"
+title: "Foundational techniques to make your APIs evolvable"
 description: ""
 layout: "guide"
 icon: "flash"
@@ -7,7 +7,7 @@ weight: 2
 ---
 
 
-As stated in the previous sections, there is several different facets that help to build Evolvable APIs.
+As stated in the previous sections, there are several different facets that help to build Evolvable APIs.
 
 There are some which can be considered as techniques that can be implemented in different ways (like Hypermedia, which is a concept but can several different implementations), other are a set of guidelines, patterns or standards. We can consider it as the **building blocks** that make possible Evolvable APIs.
 
@@ -63,29 +63,11 @@ And that’s what also made the Web succeed, scale and adapt to the evolution.
 
 For your API, you will find useful to use Standards whenever they are available and they address one of your needs. For example:
 
-* HTTP as communication protocol (not just transport protocol), with their methods, headers, response codes and all the semantincs that are already defined in it. Have I heard anyone thinking in REST? ;)
+* HTTP as communication protocol (not just transport protocol), with their methods, headers, response codes and all the semantics that are already defined in it. Have I heard anyone thinking in REST? ;)
 
 * Hypermedia MIME types. Choose at least one (or more) of the defined standards to communicate the navigation and options that the client can take. There are several different ones: HAL, Siren, JSON-LD, Collection+JSON… Read of them and chose whichever best fits your needs.
 
 * IANA Link Relations. If you need to add links between resources. (some Hypermedia Types are already using IANA Link Relations.
-
-</article>
-
-<article id="4">
-
-## Versioning your API Contract
-
-Every API defines a contract that the API clients depend on. The contract may be composed of URLs, HTTP methods, error codes, message types, input params and much more. If the contract changes in a backwards incompatible way it is likely that consumers will break. What’s the best way to deal with that situation?
-
-The most evolvable way is by making your contract small enough and solid enough that you will never need to break backwards compatibility. This may sound too idealistic for people who are used to API contracts which very large surface areas such as a large list of resource URLs with careful documentation for what can be done with each of them, the input and output formats, error codes, etc. But by applying the recipes from this website you will find ways to reduce the size of the API contract, and then, not breaking backwards compatibility suddenly doesn’t seem so difficult.
-
-However, in some cases, it might be necessary to make backwards incompatible changes. In that case versioning is the least bad option. But there are many ways of doing versioning, what is the best way of doing it? Here are some suggestions:
-
-* Don’t version upfront unless you know for sure that you will need to break backwards compatibility.
-
-* Avoid versioning the whole API if only certain parts of it will have to change in a backwards incompatible way.
-
-* Isolate the areas of the API that might have to be changed. Try to find a way to not make them part of the contract and use some discoverability features instead. For that areas where it’s not possible find a way to version only the bare minimum, for example through MIME type versioning.
 
 {call DocsList.render}
 	{param section: $page /}

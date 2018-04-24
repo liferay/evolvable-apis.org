@@ -12,9 +12,9 @@ weight: 1
 
 ## What makes an API Evolvable?
 
-Long story short, an evolvable APIs is an API that has been decided to facilitate seamless evolution. This is achieved through set of characteristics, design principles and capabilities that confer the API the capability of evolving and adapting to changes without breaking any client that is already consuming it. And at the same time they allow clients to use them in a way that can discover and enhance its behaviour automatically when that evolution happens.
+Long story short, an evolvable APIs is an API that has been designed to facilitate seamless evolution. This is achieved through set of characteristics, design principles and capabilities that confer the API the capability of evolving and adapting to changes without breaking clients that are already consuming it. And at the same time they allow clients to use them in a way that can discover new capabilities and enhance its behaviour automatically when that evolution happens.
 
-This could sound like an chasing "El Dorado", like an impossible goal to reach, but in fact it is not.
+This could sounds like an chasing “El Dorado”, like an impossible goal to reach, but in fact it is not.
 
 The web is almost 30 years old. If something has been proven key, is the capability of the Web to evolve gracefully over the years.
 
@@ -30,22 +30,13 @@ But we think that, when necessary, we can bring some of those design principles 
 
 ## Should your API be evolvable?
 
-The quick answer is "It depends". This is not a matter of black and white, of what is right and what is wrong. We are not trying to establish what is better in absolute terms.
+The quick answer is “It depends”. This is not a matter of black and white, of what is right and what is wrong. We are not trying to establish what is better in absolute terms.
 
 Whenever it comes to designing your Web API, the first question you should ask yourself is What are your -or your customer’s- needs?
 
-Don’t get this wrong, Evolvable APIs are not so difficult, but any API design decision must take into account costs and benefits
-
-To create an Evolvable API, there are some design principles, techniques and tools that you need to consider when crafting your Web APIs. For each of those you take into account, it will probably add a little extra complexity or require specific work to be added to the contract, the construction process or the service consumption instructions.
-
-Again, this is a balance game, maybe you don’t need all the features of a full Evolvable API, but still, you will probably want to benefit from one or more characteristics that they can bring to your API.
-
-Our best advice is that you read through the following sections and decide what fits and what does not apply to your case or foreseeable near future.
+To facilitate with the decision making, this website has been organized in the form of some introductory articles to provide base knowledge and a collection of recipes. Each recipe addresses a real world challenge and proposes one or more ways to solve it following an evolvable approach. The recipes explain the context as well as the benefits and costs to facilitate deciding whether it should be applied to your particular scenario.
 
 Maybe you will discover that some solutions or techniques are a great fit for your API while others are not. That’s perfectly fine, nobody knows better than you what your API needs.
-
-If you are interested in learning more about  Evolvable APIs, or how any of those features can affect or benefic your case, maybe you can go through our Use Cases sections in which we gather up some real cases in which Evolvable APIs have proved to release a serious pain for others.
-
 
 {call DocsList.render}
 	{param section: $page /}
