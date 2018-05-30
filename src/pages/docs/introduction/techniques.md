@@ -31,7 +31,7 @@ That way, Hypermedia, can be seen as the mechanism that enables the autodiscover
 
 ## Shared Vocabularies
 
-Use carefully crafted message types that are focused on the needs of the consumers, instead of hoy the API is implemented *today*.
+Use carefully crafted message types that are focused on the needs of the consumers, instead of how the API is implemented *today*.
 
 It’s useful to speak a language that will result familiar to the developers of clients for your APIs. Using the same language means less misunderstandings, and it eases other participants to start talking to your API. Using your own slang or assigning specific meanings you only know, will make more difficult to others to understand what you are saying.
 
@@ -67,7 +67,7 @@ For your API, you will find useful to use Standards whenever they are available 
 
 * Hypermedia MIME types. Choose at least one (or more) of the defined standards to communicate the navigation and options that the client can take. There are several different ones: HAL, Siren, JSON-LD, Collection+JSON… Read of them and chose whichever best fits your needs.
 
-* IANA Link Relations. If you need to add links between resources. (some Hypermedia Types are already using IANA Link Relations.
+* IANA Link Relations. If you need to add links between resources. Some Hypermedia Types are already using IANA Link Relations.
 
 {call DocsList.render}
 	{param section: $page /}
